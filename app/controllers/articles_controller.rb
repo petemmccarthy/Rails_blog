@@ -1,5 +1,11 @@
 class ArticlesController < ApplicationController
 
+	http_basic_authenticate_with name: "peter", password: "12345678", except: [:index, :show]
+ 
+  def index
+    @articles = Article.all
+  end
+
 	def new
 		@article = Article.new # this creates a new instance variable
 	end
@@ -22,10 +28,6 @@ class ArticlesController < ApplicationController
 
 	def show
   	@article = Article.find(params[:id])
-	end
-
-	def index
-  	@articles = Article.all
 	end
 
 	def edit
